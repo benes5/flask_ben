@@ -6,6 +6,7 @@ class Chats(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # システムで使う番号
     name = db.Column(db.String(255))  # 社員名
     group = db.Column(db.String(255))
+    text = db.Column(db.String)
     # mail = db.Column(db.String(255))  # メール
     # is_remote = db.Column(db.Boolean)  # リモート勤務しているか
     # department = db.Column(db.String(255))  # 部署
