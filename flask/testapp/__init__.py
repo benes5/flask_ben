@@ -2,13 +2,38 @@ from flask import Flask, request, jsonify, current_app
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import random
+# from testapp import Config
+
+
+import os
+# class DevConfig:
+#     # SQLAlchemy
+#     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{user}:{password}@{host}/{dbname}?charset=utf8'.format(**{
+#         'user': os.getenv('DB_USER', 'root'),
+#         'password': os.getenv('DB_PASSWORD', ''),
+#         'host': os.getenv('DB_HOST', 'localhost'),
+#         'dbname': os.getenv('DB_NAME')
+#     })
+#     SQLALCHEMY_TRACK_MODIFICATIONS = False
+#     SQLALCHEMY_ECHO = False
+
+# Config = DevConfig
+
+
 app = Flask(__name__)
 CORS(app)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bs5.db'
+# app.config.from_object(Config)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://bs6:EWCZW4QCSJQBLBz@top2.nearest.of.bs6-db.internal:5432/bs6?sslmode=disable'
 
 
 db = SQLAlchemy(app)
+def init_db(app):
+    db.create_all()
+    db.init_app(app)
+# init_db(db)
+
+# with app.app_context():
+#     db.create_all()
 from .models import user, times, chats
 from testapp.models.user import Accounts
 from testapp.models.times import Times
